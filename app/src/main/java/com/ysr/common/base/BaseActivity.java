@@ -27,7 +27,7 @@ import java.util.Date;
 import butterknife.ButterKnife;
 
 /**
- * 基类
+ * 基类AppCompatActivity
  */
 
 public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
