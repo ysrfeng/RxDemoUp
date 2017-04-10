@@ -37,7 +37,18 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         //这里修改apk文件名
-                        def fileName = "BaseProject-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}.apk"
+                        def fileName
+                        if (variant.buildType.name == "release") {
+
+                            fileName  = "BaseProject-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}.apk"
+                        } else if (variant.buildType.name == "debug") {
+
+                            fileName   = "BaseProject-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}_debug.apk"
+                        } else if (variant.buildType.name == "dev") {
+
+                            fileName   = "BaseProject-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}_devg.apk"
+                        }
+
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }
