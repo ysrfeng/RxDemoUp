@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import com.ysr.BuildConfig;
 import com.ysr.R;
 import com.ysr.common.baseapp.AppManager;
+import com.ysr.common.baseapp.BaseApplication;
 import com.ysr.common.baserx.RxManager;
 import com.ysr.common.commonutils.TUtil;
 import com.ysr.common.commonutils.ToastUitl;
@@ -34,7 +35,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     public E mModel;
     public Context mContext;
     public RxManager mRxManager;
-
+    protected BaseApplication app;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         if (mPresenter != null) {
             mPresenter.mContext = this;
         }
+        app = BaseApplication.getInstance();
         this.initPresenter();
         this.initView();
     }

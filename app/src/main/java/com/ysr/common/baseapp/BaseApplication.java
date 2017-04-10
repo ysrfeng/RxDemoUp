@@ -9,6 +9,7 @@ import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.ysr.BuildConfig;
+import com.ysr.api.bean.EntityInfo;
 import com.ysr.common.commonutils.LogUtils;
 import com.ysr.map.LocationService;
 
@@ -20,7 +21,7 @@ public class BaseApplication extends Application {
     private static BaseApplication baseApplication;
     public LocationService locationService;
     public Vibrator mVibrator;
-
+    private EntityInfo entity;
 
     @Override
     public void onCreate() {
@@ -34,6 +35,13 @@ public class BaseApplication extends Application {
     }
 
     public static Context getAppContext() {
+        if (null == baseApplication) {
+            throw new RuntimeException("必须先实例化Application");
+        }
+        return baseApplication;
+    }
+
+    public static BaseApplication getInstance() {
         if (null == baseApplication) {
             throw new RuntimeException("必须先实例化Application");
         }
@@ -60,5 +68,14 @@ public class BaseApplication extends Application {
         MultiDex.install(this);
     }
 
-    
+    public EntityInfo getInfo() {
+        if (entity == null) {
+            entity = new EntityInfo();
+        }
+        return entity;
+    }
+
+    public void setInfo(EntityInfo entity) {
+        this.entity = entity;
+    }
 }
